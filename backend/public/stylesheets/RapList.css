@@ -14,11 +14,22 @@ body{
 
 #home{
     /*border: 5px solid red;*/
-    width: 500px;
+    width: 74%;
     margin-top: 5%;
-    margin-left: 30%;
+    margin-left: 13%;
 }
 
 #displayIMG{
     border: 5px solid white;
+}
+
+.rapper-list {
+    list-style-type: none;
+    display: inline;
+    padding-right: 5%;
+}
+
+.btn-trans {
+    background: rgba(0,0,0,0);
+    border: none;
 }

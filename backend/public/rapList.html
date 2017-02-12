@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RapList<</title>
+    <title>RapList</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -39,17 +41,53 @@
 
 <div class="container">
     <div id="displayIMG" >
-        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
-        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
-        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
-        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
+        <ul id="list">
+        </ul>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sound Track</h4>
+      </div>
+      <div class="modal-body">
+        <ul id="sound-list">
 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $.get("/api/rappers_name", function(response) {
+            response.names.forEach(function(rapper) {
+                var id = rapper.replace(" ", "")
+                $.get("/api/rappers_info/" + rapper, function(response) {
+                    response.lines.forEach(function(elem, index) {
+                        $("#sound-list").append('<li class="disappear_'+id+' sounds"><a href="' + elem.sound_src +'">' + elem.line + '</a></li>')
+                        $(".disappear_"+id).hide()
+                    })
+                    $("#list").append('<li class="rapper-list"><button class="btn-trans" data-toggle="modal" data-target="#myModal"><img onclick="popup(\''+id+'\')" src="' + response.img_src + '" /></button></li>')
+                })
+            })
+        })
+    })
+
+    function popup(id) {
+        $('#myModal').on('shown.bs.modal', function () {
+            $(".disappear_"+id).show()
+        })
+        $('#myModal').on('hidden.bs.modal', function () {
+            location.reload();
+        })
+    }
+
+</script>
 </body>
 </html>

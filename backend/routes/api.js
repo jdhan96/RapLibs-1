@@ -9,7 +9,7 @@ var s3 = new AWS.S3();
 router.get("/rappers_name", function(req, res) {
 	async.parallel({
 		name: function(callback) {
-			s3.listObjects({Bucket: "raplibs101"}, 	function(err, data){
+			s3.listObjects({Bucket: "raplibs4"}, 	function(err, data){
 				var set = new Set();
 			  if (err) {
 			    return res.send(err);
@@ -33,7 +33,7 @@ router.get("/rappers_info/:name", function(req, res) {
 	var rapperName = req.params.name;
 	async.parallel({
 		img: function(callback) {
-			s3.listObjects({Bucket: "raplibs101"}, 	function(err, data){
+			s3.listObjects({Bucket: "raplibs4"}, 	function(err, data){
 				var image = null;
 			  if (err) {
 			    return res.send(err);
@@ -54,7 +54,7 @@ router.get("/rappers_info/:name", function(req, res) {
 			});			
 		},
 		line: function(callback) {
-			s3.listObjects({Bucket: "raplibs101"}, 	function(err, data){
+			s3.listObjects({Bucket: "raplibs4"}, 	function(err, data){
 				var lines = [];
 			  if (err) {
 			    return res.send(err);
