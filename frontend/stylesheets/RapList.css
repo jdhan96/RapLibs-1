@@ -21,4 +21,8 @@ body{
 
 #displayIMG{
     border: 5px solid white;
+    padding-top:2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    height:auto;
 }
