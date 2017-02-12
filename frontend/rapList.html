@@ -39,14 +39,25 @@
 
 <div class="container">
     <div id="displayIMG" >
+        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" onclick="play()" />
+        <audio id="audio" src="audio/21 21 21.mp3" ></audio>
+        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" onclick="play()" />
+        <audio id="audio2" src="audio/Boi.mp3" ></audio>
         <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
         <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
         <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
         <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
         <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
-        <img src="images/21 Savage/21 Savage.png" alt="21 Savage" />
-        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" />
+        <img src="images/Big Sean/Big Sean.png" alt="Big Sean" onclick="play()" />
+
+
+        <script>
+            function play(){
+                var audio = document.getElementById("audio");
+                audio.play();
+            }
+        </script>
+
     </div>
 </div>
 
