@@ -61,6 +61,10 @@
   </div>
 </div>
 
+<div id="audio-sec">
+
+</div>
+
 <script type="text/javascript">
     $(function() {
         $.get("/api/rappers_name", function(response) {
@@ -69,7 +73,10 @@
                 $.get("/api/rappers_info/" + rapper, function(response) {
                     $(".modal-body").append('<ul class="rapper-list_'+id+'"></ul>')
                     response.lines.forEach(function(elem, index) {
-                        $(".rapper-list_"+id).append('<li><a href="' + elem.sound_src +'">' + elem.line + '</a></li>')
+                        var lineId = elem.line.replace(" ", "").replace("'","")
+                        //$(".rapper-list_"+id).append('<li><a href="' + elem.sound_src +'">' + elem.line + '</a></li>')
+                        $(".rapper-list_"+id).append('<li><a href="#" onclick="document.getElementById(\''+lineId+'\').play()">'+ elem.line +'</a></li>')
+                        $("#audio-sec").append('<audio id="'+lineId+'" src="'+elem.sound_src+'" preload="auto"></audio>')
                         $(".rapper-list_"+id).hide()
                     }) 
                     $("#list").append('<li class="rapper-list"><button class="btn-trans" data-toggle="modal" data-target="#myModal"><img onclick="popup(\''+id+'\')" src="' + response.img_src + '" /></button></li>')
@@ -79,8 +86,8 @@
     })
 
     function popup(id) {
-        $(".modal-body ul").hide()
         $('#myModal').on('shown.bs.modal', function () {
+            $(".modal-body ul").hide()
             $(".rapper-list_"+id).show()
         })
     }
