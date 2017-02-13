@@ -55,9 +55,7 @@
         <h4 class="modal-title" id="myModalLabel">Sound Track</h4>
       </div>
       <div class="modal-body">
-        <ul id="sound-list">
-
-        </ul>
+        
       </div>
     </div>
   </div>
@@ -69,10 +67,11 @@
             response.names.forEach(function(rapper) {
                 var id = rapper.replace(" ", "")
                 $.get("/api/rappers_info/" + rapper, function(response) {
+                    $(".modal-body").append('<ul class="rapper-list_'+id+'"></ul>')
                     response.lines.forEach(function(elem, index) {
-                        $("#sound-list").append('<li class="disappear_'+id+' sounds"><a href="' + elem.sound_src +'">' + elem.line + '</a></li>')
-                        $(".disappear_"+id).hide()
-                    })
+                        $(".rapper-list_"+id).append('<li><a href="' + elem.sound_src +'">' + elem.line + '</a></li>')
+                        $(".rapper-list_"+id).hide()
+                    }) 
                     $("#list").append('<li class="rapper-list"><button class="btn-trans" data-toggle="modal" data-target="#myModal"><img onclick="popup(\''+id+'\')" src="' + response.img_src + '" /></button></li>')
                 })
             })
@@ -80,11 +79,9 @@
     })
 
     function popup(id) {
+        $(".modal-body ul").hide()
         $('#myModal').on('shown.bs.modal', function () {
-            $(".disappear_"+id).show()
-        })
-        $('#myModal').on('hidden.bs.modal', function () {
-            location.reload();
+            $(".rapper-list_"+id).show()
         })
     }
 

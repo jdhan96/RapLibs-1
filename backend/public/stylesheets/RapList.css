@@ -23,7 +23,7 @@ body{
     border: 5px solid white;
 }
 
-.rapper-list {
+[class^="rapper-list"] {
     list-style-type: none;
     display: inline;
     padding-right: 5%;
